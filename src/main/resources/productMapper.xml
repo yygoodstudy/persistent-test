@@ -1,0 +1,20 @@
+<mapper namespace="product">
+    <!--sql的唯一标识：namespace.id组成：statementId-->
+    <select id="selectUserList" resultType="com.example.pojo.User">
+        select * from t_product
+    </select>
+
+    <!--
+        User user = new User();
+        user.setId(1);
+        user.setUsername("zhangsan")
+        resultType：自定义的结果集类型
+        parameterType：利用面向对象的思想，将要传入到sql的参数封装到对象中
+        通过#{}这种占位符，来取对象中的参数
+        然后通过反射+内省的方式将sql执行的结果映射到resultType属性定义的类型中
+    -->
+    <select id="selectUserByUsernameAndId" resultType="com.example.pojo.User" parameterType="com.example.pojo.User">
+        select * from t_product where id = #{id} and username = #{username}
+        <!--        select * from t_product where id = ? and username = ?-->
+    </select>
+</mapper>
